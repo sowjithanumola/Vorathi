@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SowLang — A New Spoken Language by Sowjith Anumola</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f7f2ea;
+  --warm: #ede4d0;
+  --sand: #d4c4a0;
+  --terra: #c4712a;
+  --rust: #a0442a;
+  --earth: #5c3d1e;
+  --ink: #1a1208;
+  --muted: #8a7560;
+  --gold: #c9943a;
+  --sky: #4a7fa0;
+  --sage: #5a7c5a;
+  --deep: #2a1a08;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(247,242,234,0.93);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,113,42,0.18);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--ink);letter-spacing:-0.02em;}
+.nav-logo em{color:var(--terra);font-style:italic;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--terra);}
+.nav-cta{font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--terra);color:#fff;border:none;padding:10px 24px;border-radius:2px;cursor:pointer;transition:background 0.2s;}
+.nav-cta:hover{background:var(--rust);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 15% 60%,rgba(196,113,42,0.09) 0%,transparent 55%),
+             radial-gradient(ellipse at 85% 20%,rgba(74,127,160,0.07) 0%,transparent 55%),
+             var(--cream);}
+
+/* Floating glyph rings */
+.glyph-ring{position:absolute;border-radius:50%;border:1px solid;opacity:0.07;pointer-events:none;}
+.gr1{width:600px;height:600px;border-color:var(--terra);top:-150px;left:-200px;animation:spin 80s linear infinite;}
+.gr2{width:400px;height:400px;border-color:var(--sky);bottom:-100px;right:-120px;animation:spin 60s linear infinite reverse;}
+.gr3{width:200px;height:200px;border-color:var(--gold);top:30%;right:10%;animation:spin 40s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Scattered glyphs */
+.bg-glyphs{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.bg-glyphs span{position:absolute;font-size:3.5rem;opacity:0.04;color:var(--earth);font-family:'Playfair Display',serif;font-style:italic;}
+
+.hero-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--terra);margin-bottom:1.5rem;display:flex;align-items:center;gap:12px;animation:fadeUp 0.8s ease both;}
+.eyebrow-line{width:40px;height:1px;background:var(--terra);}
+
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(4.5rem,13vw,10rem);font-weight:900;line-height:0.88;letter-spacing:-0.03em;animation:fadeUp 0.9s ease 0.1s both;}
+.hero-title .italic{font-style:italic;color:var(--terra);}
+.hero-title .outline{-webkit-text-stroke:2px var(--earth);color:transparent;}
+
+.hero-tagline{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:300;font-style:italic;color:var(--muted);margin:2rem auto 1rem;max-width:520px;line-height:1.6;animation:fadeUp 1s ease 0.2s both;}
+
+.hero-phrase{display:inline-block;background:rgba(196,113,42,0.08);border:1px solid rgba(196,113,42,0.25);border-radius:4px;padding:12px 28px;font-size:1.5rem;font-style:italic;color:var(--terra);margin:0.5rem auto 2.5rem;letter-spacing:0.04em;animation:fadeUp 1s ease 0.3s both;}
+.hero-phrase small{display:block;font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);font-style:normal;margin-top:4px;}
+
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s ease 0.45s both;}
+.btn{font-family:'Josefin Sans',sans-serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:14px 36px;border-radius:2px;cursor:pointer;text-decoration:none;transition:all 0.25s;border:none;}
+.btn-fill{background:var(--terra);color:#fff;box-shadow:0 4px 20px rgba(196,113,42,0.3);}
+.btn-fill:hover{background:var(--rust);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--earth);border:1.5px solid var(--earth);}
+.btn-outline:hover{background:var(--earth);color:var(--cream);}
+
+.scroll-down{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Josefin Sans',sans-serif;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);animation:fadeUp 1.2s ease 0.6s both;}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--terra),transparent);animation:drip 2.5s ease infinite;}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTION BASE */
+section{padding:7rem 2rem;position:relative;}
+.container{max-width:1180px;margin:0 auto;}
+.sec-label{font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--terra);margin-bottom:0.8rem;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';width:30px;height:1px;background:var(--terra);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1;letter-spacing:-0.03em;margin-bottom:1.2rem;}
+.sec-desc{font-size:1.15rem;font-weight:300;color:var(--muted);line-height:1.8;max-width:560px;}
+
+/* ABOUT */
+.about-bg{background:var(--warm);}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;margin-top:4rem;}
+.about-text p{font-size:1.15rem;line-height:1.9;color:var(--earth);margin-bottom:1.2rem;font-weight:400;}
+.about-text strong{color:var(--terra);}
+.phoneme-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;}
+.phoneme-card{background:var(--cream);border:1px solid rgba(196,113,42,0.2);border-radius:6px;padding:1.2rem;transition:all 0.25s;}
+.phoneme-card:hover{border-color:var(--terra);transform:translateY(-3px);box-shadow:0 8px 24px rgba(196,113,42,0.12);}
+.phoneme-glyph{font-family:'Playfair Display',serif;font-size:2.2rem;font-style:italic;color:var(--terra);line-height:1;}
+.phoneme-name{font-family:'Josefin Sans',sans-serif;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;}
+.phoneme-example{font-size:1.05rem;color:var(--earth);margin-top:0.2rem;font-style:italic;}
+
+/* ALPHABET SHOWCASE */
+.alpha-section{background:var(--deep);color:var(--cream);}
+.alpha-section .sec-label{color:var(--gold);}
+.alpha-section .sec-label::before{background:var(--gold);}
+.alpha-section .sec-title{color:var(--cream);}
+.alpha-section .sec-desc{color:rgba(245,240,232,0.6);}
+.alphabet-scroll{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:1rem;margin-top:3rem;}
+.alpha-char{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:1.2rem 0.5rem;text-align:center;transition:all 0.25s;cursor:default;}
+.alpha-char:hover{background:rgba(196,113,42,0.15);border-color:rgba(196,113,42,0.4);}
+.alpha-char .glyph{font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;color:var(--gold);display:block;}
+.alpha-char .roman{font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.4);margin-top:4px;display:block;}
+.alpha-char .sound{font-size:0.85rem;color:rgba(245,240,232,0.6);margin-top:2px;display:block;font-style:italic;}
+
+/* SAMPLE PHRASES */
+.phrases-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:3rem;}
+.phrase-card{background:var(--cream);border:1px solid rgba(196,113,42,0.15);border-radius:8px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;}
+.phrase-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--terra);}
+.phrase-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(92,61,30,0.12);}
+.phrase-sowlang{font-family:'Playfair Display',serif;font-size:1.6rem;font-style:italic;color:var(--terra);line-height:1.2;}
+.phrase-phonetic{font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;}
+.phrase-meaning{font-size:1.05rem;color:var(--earth);margin-top:0.7rem;border-top:1px solid rgba(196,113,42,0.12);padding-top:0.7rem;font-weight:400;}
+.phrase-context{font-size:0.88rem;color:var(--muted);margin-top:0.3rem;font-style:italic;}
+
+/* COMPARISON */
+.compare-bg{background:var(--warm);}
+.compare-table-wrap{margin-top:3rem;overflow-x:auto;border-radius:10px;border:1px solid rgba(196,113,42,0.18);box-shadow:0 10px 40px rgba(92,61,30,0.1);}
+table{width:100%;border-collapse:collapse;font-family:'Josefin Sans',sans-serif;}
+thead tr{background:var(--earth);}
+th{padding:1rem 1.5rem;text-align:left;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,240,232,0.7);border-bottom:none;white-space:nowrap;}
+th.hl{color:var(--gold);background:rgba(201,148,58,0.15);}
+th.hl::before{content:'✦ ';font-size:0.5rem;}
+td{padding:1rem 1.5rem;font-size:0.82rem;border-bottom:1px solid rgba(196,113,42,0.1);color:var(--earth);background:var(--cream);vertical-align:middle;font-family:'Cormorant Garamond',serif;font-size:1rem;}
+td.hl{background:rgba(196,113,42,0.05);color:var(--terra);font-weight:600;}
+tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:rgba(196,113,42,0.04);}
+tbody tr:hover td.hl{background:rgba(196,113,42,0.09);}
+.pip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-family:'Josefin Sans',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;}
+.pip-green{background:rgba(90,124,90,0.12);color:var(--sage);}
+.pip-amber{background:rgba(201,148,58,0.12);color:var(--gold);}
+.pip-red{background:rgba(160,68,42,0.1);color:var(--rust);}
+.pip-blue{background:rgba(74,127,160,0.12);color:var(--sky);}
+
+/* GRAMMAR */
+.grammar-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;}
+.grammar-card{background:var(--warm);border-radius:10px;padding:2.5rem;border:1px solid rgba(196,113,42,0.12);}
+.grammar-card h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:0.3rem;}
+.grammar-card .subtitle{font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--terra);margin-bottom:1.2rem;}
+.grammar-card p{font-size:1.05rem;color:var(--earth);line-height:1.8;margin-bottom:1rem;}
+.example-box{background:rgba(196,113,42,0.06);border-left:3px solid var(--terra);border-radius:0 6px 6px 0;padding:1rem 1.2rem;margin-top:0.8rem;}
+.example-box .sow{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:var(--terra);}
+.example-box .ipa{font-family:'Josefin Sans',sans-serif;font-size:0.68rem;color:var(--muted);letter-spacing:0.06em;margin-top:2px;}
+.example-box .eng{font-size:0.95rem;color:var(--earth);margin-top:4px;font-style:italic;}
+
+/* TONES SECTION */
+.tones-strip{background:linear-gradient(135deg,var(--earth),var(--rust));color:var(--cream);padding:5rem 2rem;}
+.tones-inner{max-width:1180px;margin:0 auto;}
+.tones-inner .sec-label{color:rgba(245,240,232,0.5);}
+.tones-inner .sec-label::before{background:rgba(245,240,232,0.3);}
+.tones-inner .sec-title{color:var(--cream);}
+.tones-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;margin-top:3rem;}
+.tone-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:1.5rem;text-align:center;transition:all 0.25s;}
+.tone-card:hover{background:rgba(255,255,255,0.12);transform:translateY(-4px);}
+.tone-mark{font-size:2.4rem;font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);}
+.tone-name{font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.5);margin-top:0.4rem;}
+.tone-desc{font-size:0.9rem;color:rgba(245,240,232,0.7);margin-top:0.5rem;line-height:1.5;}
+.tone-curve{font-size:1.1rem;color:rgba(201,148,58,0.8);margin-top:0.3rem;}
+
+/* CREATOR */
+.creator-section{background:var(--cream);}
+.creator-wrap{margin-top:4rem;display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center;}
+.creator-portrait{position:relative;}
+.portrait-frame{width:320px;height:380px;background:linear-gradient(135deg,rgba(196,113,42,0.15),rgba(74,127,160,0.1));border-radius:12px;border:1px solid rgba(196,113,42,0.25);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.portrait-frame::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(196,113,42,0.03) 10px,rgba(196,113,42,0.03) 20px);}
+.portrait-initials{font-family:'Playfair Display',serif;font-size:7rem;font-weight:900;font-style:italic;color:var(--terra);opacity:0.25;user-select:none;}
+.portrait-badge{position:absolute;bottom:-16px;right:-16px;background:var(--terra);color:#fff;border-radius:8px;padding:12px 18px;font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;box-shadow:0 8px 20px rgba(196,113,42,0.3);}
+.creator-info h2{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;line-height:1;letter-spacing:-0.03em;margin-bottom:0.3rem;}
+.creator-info h2 em{color:var(--terra);font-style:italic;}
+.creator-role{font-family:'Josefin Sans',sans-serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--terra);margin-bottom:2rem;}
+.creator-quote{font-size:1.3rem;font-style:italic;font-weight:300;color:var(--earth);line-height:1.7;border-left:3px solid var(--terra);padding-left:1.5rem;margin-bottom:2rem;}
+.creator-bio p{font-size:1.05rem;color:var(--muted);line-height:1.8;margin-bottom:0.8rem;}
+.creator-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+.c-stat{text-align:center;padding:1.2rem;background:var(--warm);border-radius:6px;border:1px solid rgba(196,113,42,0.12);}
+.c-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--terra);line-height:1;}
+.c-stat-label{font-family:'Josefin Sans',sans-serif;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+/* FOOTER */
+footer{background:var(--deep);color:rgba(245,240,232,0.5);padding:3rem;text-align:center;}
+footer .footer-logo{font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;color:var(--cream);margin-bottom:0.5rem;}
+footer .footer-logo em{color:var(--gold);}
+footer p{font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.35);}
+footer span{color:var(--gold);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .phrases-grid{grid-template-columns:1fr;}
+  .grammar-grid{grid-template-columns:1fr;}
+  .tones-grid{grid-template-columns:repeat(2,1fr);}
+  .creator-wrap{grid-template-columns:1fr;}
+  .creator-portrait{display:none;}
+  .creator-stats{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sow<em>Lang</em></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#alphabet">Alphabet</a></li>
+    <li><a href="#phrases">Phrases</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#grammar">Grammar</a></li>
+    <li><a href="#creator">Creator</a></li>
+  </ul>
+  <button class="nav-cta">Listen →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- background glyphs -->
+  <div class="bg-glyphs">
+    <span style="top:12%;left:8%">Ṡ</span><span style="top:22%;right:14%">ŵ</span>
+    <span style="bottom:20%;left:5%">ǎ</span><span style="top:55%;right:6%">ñ</span>
+    <span style="bottom:30%;right:22%">ğ</span><span style="top:35%;left:20%">ə</span>
+    <span style="top:70%;left:38%">ŏ</span><span style="top:18%;left:44%">ṙ</span>
+  </div>
+  <div class="glyph-ring gr1"></div>
+  <div class="glyph-ring gr2"></div>
+  <div class="glyph-ring gr3"></div>
+
+  <div class="hero-eyebrow">
+    <span class="eyebrow-line"></span>
+    A New Spoken Language · Born 2024
+    <span class="eyebrow-line"></span>
+  </div>
+
+  <h1 class="hero-title">
+    Sow<em class="italic">Lang</em>
+  </h1>
+
+  <p class="hero-tagline">A living, spoken language with its own sounds, grammar, and soul — crafted to be expressive, melodic, and beautifully human.</p>
+
+  <div class="hero-phrase">
+    <em>Sowā vēnu mirā</em>
+    <small>IPA: /soʊ.aː veː.nu mɪ.raː/ · "I speak, therefore I exist"</small>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#phrases" class="btn btn-fill">Hear the Phrases</a>
+    <a href="#compare" class="btn btn-outline">Compare Languages</a>
+  </div>
+
+  <div class="scroll-down">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-bg">
+  <div class="container">
+    <div class="sec-label">What is SowLang?</div>
+    <h2 class="sec-title">More than words.<br>A new voice.</h2>
+
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>SowLang (<strong>Sowāvēna</strong> in its own tongue) is a constructed spoken language — a <em>conlang</em> — designed from the ground up to be expressive, phonetically rich, and emotionally resonant.</p>
+        <p>Inspired by the musicality of <strong>Telugu</strong>, the tonal clarity of <strong>Mandarin</strong>, the flowing vowels of <strong>Italian</strong>, and the logical structure of <strong>Esperanto</strong>, SowLang weaves these influences into something entirely original.</p>
+        <p>It features <strong>28 consonants</strong>, <strong>12 vowels</strong>, 5 distinct tones, and a Subject-Verb-Object word order — making it accessible to speakers of most world languages while offering depth for advanced expression.</p>
+      </div>
+      <div>
+        <div class="phoneme-grid">
+          <div class="phoneme-card reveal reveal-delay-1">
+            <div class="phoneme-glyph">Ṡ</div>
+            <div class="phoneme-name">Sow / /soʊ/</div>
+            <div class="phoneme-example">"I / Me" — the self</div>
+          </div>
+          <div class="phoneme-card reveal reveal-delay-2">
+            <div class="phoneme-glyph">ā</div>
+            <div class="phoneme-name">Ā / /aː/</div>
+            <div class="phoneme-example">Long open vowel — breath</div>
+          </div>
+          <div class="phoneme-card reveal reveal-delay-3">
+            <div class="phoneme-glyph">Ṽ</div>
+            <div class="phoneme-name">Vē / /veː/</div>
+            <div class="phoneme-example">"Speak / Say" — the verb root</div>
+          </div>
+          <div class="phoneme-card reveal reveal-delay-1">
+            <div class="phoneme-glyph">ñ</div>
+            <div class="phoneme-name">Nu / /nu/</div>
+            <div class="phoneme-example">Connector particle — and/with</div>
+          </div>
+          <div class="phoneme-card reveal reveal-delay-2">
+            <div class="phoneme-glyph">m̃</div>
+            <div class="phoneme-name">Mirā / /mɪ.raː/</div>
+            <div class="phoneme-example">"Exist / Live" — to be</div>
+          </div>
+          <div class="phoneme-card reveal reveal-delay-3">
+            <div class="phoneme-glyph">ŏ</div>
+            <div class="phoneme-name">Rōva / /roː.va/</div>
+            <div class="phoneme-example">"Love / Warmth" — emotion root</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALPHABET -->
+<section id="alphabet" class="alpha-section">
+  <div class="container">
+    <div class="sec-label">The SowLang Script</div>
+    <h2 class="sec-title" style="color:var(--cream)">28 Consonants · 12 Vowels</h2>
+    <p class="sec-desc">Each character maps to a unique phoneme, making SowLang fully phonetic. What you see is exactly what you say.</p>
+
+    <div class="alphabet-scroll reveal">
+      <!-- Consonants -->
+      <div class="alpha-char"><span class="glyph">Ṡ</span><span class="roman">S</span><span class="sound">/s/</span></div>
+      <div class="alpha-char"><span class="glyph">Ṽ</span><span class="roman">V</span><span class="sound">/v/</span></div>
+      <div class="alpha-char"><span class="glyph">Ñ</span><span class="roman">N</span><span class="sound">/n/</span></div>
+      <div class="alpha-char"><span class="glyph">M̃</span><span class="roman">M</span><span class="sound">/m/</span></div>
+      <div class="alpha-char"><span class="glyph">Ṙ</span><span class="roman">R</span><span class="sound">/r/</span></div>
+      <div class="alpha-char"><span class="glyph">Ḷ</span><span class="roman">L</span><span class="sound">/l/</span></div>
+      <div class="alpha-char"><span class="glyph">Ḳ</span><span class="roman">K</span><span class="sound">/k/</span></div>
+      <div class="alpha-char"><span class="glyph">Ġ</span><span class="roman">G</span><span class="sound">/ɡ/</span></div>
+      <div class="alpha-char"><span class="glyph">Ṭ</span><span class="roman">T</span><span class="sound">/t/</span></div>
+      <div class="alpha-char"><span class="glyph">Ḍ</span><span class="roman">D</span><span class="sound">/d/</span></div>
+      <div class="alpha-char"><span class="glyph">Ṗ</span><span class="roman">P</span><span class="sound">/p/</span></div>
+      <div class="alpha-char"><span class="glyph">Ḃ</span><span class="roman">B</span><span class="sound">/b/</span></div>
+      <div class="alpha-char"><span class="glyph">Ẇ</span><span class="roman">W</span><span class="sound">/w/</span></div>
+      <div class="alpha-char"><span class="glyph">Ẏ</span><span class="roman">Y</span><span class="sound">/j/</span></div>
+      <div class="alpha-char"><span class="glyph">Ẑ</span><span class="roman">Z</span><span class="sound">/z/</span></div>
+      <div class="alpha-char"><span class="glyph">Ḥ</span><span class="roman">H</span><span class="sound">/h/</span></div>
+      <div class="alpha-char"><span class="glyph">Ċ</span><span class="roman">CH</span><span class="sound">/tʃ/</span></div>
+      <div class="alpha-char"><span class="glyph">Ş</span><span class="roman">SH</span><span class="sound">/ʃ/</span></div>
+      <div class="alpha-char"><span class="glyph">Ǧ</span><span class="roman">GH</span><span class="sound">/ɣ/</span></div>
+      <div class="alpha-char"><span class="glyph">Ŧ</span><span class="roman">TH</span><span class="sound">/θ/</span></div>
+      <!-- Vowels -->
+      <div class="alpha-char" style="border-color:rgba(201,148,58,0.25);background:rgba(201,148,58,0.06)">
+        <span class="glyph" style="color:var(--gold)">Ā</span><span class="roman">Ā</span><span class="sound">/aː/</span></div>
+      <div class="alpha-char" style="border-color:rgba(201,148,58,0.25);background:rgba(201,148,58,0.06)">
+        <span class="glyph" style="color:var(--gold)">Ē</span><span class="roman">Ē</span><span class="sound">/eː/</span></div>
+      <div class="alpha-char" style="border-color:rgba(201,148,58,0.25);background:rgba(201,148,58,0.06)">
+        <span class="glyph" style="color:var(--gold)">Ī</span><span class="roman">Ī</span><span class="sound">/iː/</span></div>
+      <div class="alpha-char" style="border-color:rgba(201,148,58,0.25);background:rgba(201,148,58,0.06)">
+        <span class="glyph" style="color:var(--gold)">Ō</span><span class="roman">Ō</span><span class="sound">/oː/</span></div>
+      <div class="alpha-char" style="border-color:rgba(201,148,58,0.25);background:rgba(201,148,58,0.06)">
+        <span class="glyph" style="color:var(--gold)">Ū</span><span class="roman">Ū</span><span class="sound">/uː/</span></div>
+      <div class="alpha-char" style="border-color:rgba(201,148,58,0.25);background:rgba(201,148,58,0.06)">
+        <span class="glyph" style="color:var(--gold)">Ə</span><span class="roman">Ə</span><span class="sound">/ə/</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHRASES -->
+<section id="phrases">
+  <div class="container">
+    <div class="sec-label">Common Phrases</div>
+    <h2 class="sec-title">The first words<br>you will learn</h2>
+    <p class="sec-desc">SowLang is built for human connection. Its most-used phrases reflect warmth, curiosity, and community.</p>
+
+    <div class="phrases-grid reveal">
+      <div class="phrase-card">
+        <div class="phrase-sowlang">Sowā vēla</div>
+        <div class="phrase-phonetic">/soʊ.aː veː.la/</div>
+        <div class="phrase-meaning">Hello / Greetings</div>
+        <div class="phrase-context">The standard greeting; lit. "I send warmth"</div>
+      </div>
+      <div class="phrase-card">
+        <div class="phrase-sowlang">Mirā rōva</div>
+        <div class="phrase-phonetic">/mɪ.raː roː.va/</div>
+        <div class="phrase-meaning">I love you</div>
+        <div class="phrase-context">Lit. "Existing in warmth toward you"</div>
+      </div>
+      <div class="phrase-card">
+        <div class
